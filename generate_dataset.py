@@ -38,7 +38,7 @@ def simulate_human(session_id):
     paths_to_visit = random.sample(ALL_PATHS[:5], random.randint(2, 4))
     sessions = []
     for path in paths_to_visit:
-        time.sleep(random.uniform(2.0, 8.0))
+        time.sleep(random.uniform(0.1, 0.3))
         ua = random.choice([
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
@@ -157,7 +157,7 @@ def simulate_ai_agent(session_id):
 def main():
     print("Generating dataset — 200 sessions per class")
     print("Human=0, Bot=1, AI Agent=2")
-    print("This will take about 15-20 minutes\n")
+    print("This will take about 3-4 minutes\n")
 
     all_rows = []
     fieldnames = ["session_id", "label", "label_name", "path",
@@ -167,21 +167,21 @@ def main():
                   "session_duration_s"]
 
     print("Generating HUMAN sessions (200)...")
-    for i in range(200):
+    for i in range(50):
         if i % 20 == 0:
             print(f"  Human session {i}/200...")
         rows = simulate_human(f"human_{i:04d}")
         all_rows.extend(rows)
 
     print("\nGenerating BOT sessions (200)...")
-    for i in range(200):
+    for i in range(50):
         if i % 20 == 0:
             print(f"  Bot session {i}/200...")
         rows = simulate_bot(f"bot_{i:04d}")
         all_rows.extend(rows)
 
     print("\nGenerating AI AGENT sessions (200)...")
-    for i in range(200):
+    for i in range(50):
         if i % 20 == 0:
             print(f"  AI Agent session {i}/200...")
         rows = simulate_ai_agent(f"agent_{i:04d}")
